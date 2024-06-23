@@ -1,0 +1,15 @@
+QLineEdit#status0 {
+    padding-right: 10%;
+    border: 2px solid #eaeaea;
+    border-right: 1px solid #eaeaea;
+    border-top-left-radius: 10%;
+    border-bottom-left-radius: 10%;
+}
+
+QLineEdit#status1 {
+    padding-left: 10%;
+    border: 2px solid #eaeaea;
+    border-left: 1px solid #eaeaea;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+}
