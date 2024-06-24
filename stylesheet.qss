@@ -1,15 +1,36 @@
-QLineEdit#status0 {
+QLineEdit {
+    background-color: #ffffff;
+    border: 2px solid #eeeeee;
     padding-right: 10%;
-    border: 2px solid #eaeaea;
-    border-right: 1px solid #eaeaea;
+    padding-left: 10%;
+}
+
+QLineEdit#le_Status0 {
+    border-right: 1px solid #dddddd;
     border-top-left-radius: 10%;
     border-bottom-left-radius: 10%;
 }
 
-QLineEdit#status1 {
-    padding-left: 10%;
-    border: 2px solid #eaeaea;
-    border-left: 1px solid #eaeaea;
+QLineEdit#le_Status1 {
+    border-left: 1px solid #dddddd;
     border-top-right-radius: 10%;
     border-bottom-right-radius: 10%;
+}
+
+QPushButton {
+    background-color: #ffffff;
+    border: 2px solid #eeeeee;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 10%;
+}
+
+QPushButton:hover {
+    background-color: #eeeeee;
+    border-color: #dddddd;
+}
+
+QPushButton:pressed {
+    background-color: #dddddd;
+    border-color: #cccccc;
 }
