@@ -77,6 +77,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalLayout.setContentsMargins(0, 5, 0, 5)
         self.hl_First = QHBoxLayout()
+        self.hl_First.setSpacing(0)
         self.hl_First.setObjectName("hl_First")
         self.hl_First.setContentsMargins(10, 10, 10, 10)
         self.le_NameIPLine = QLineEdit(self.markup)
@@ -122,6 +123,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.hl_First)
 
         self.hl_Second = QHBoxLayout()
+        self.hl_Second.setSpacing(0)
         self.hl_Second.setObjectName("hl_Second")
         self.hl_Second.setContentsMargins(10, 10, 10, 10)
         self.le_NamePortLine = QLineEdit(self.markup)
@@ -163,6 +165,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.line)
 
         self.hl_Third = QHBoxLayout()
+        self.hl_Third.setSpacing(0)
         self.hl_Third.setObjectName("hl_Third")
         self.hl_Third.setContentsMargins(10, 10, 10, 10)
         self.pb_ConnectButton = QPushButton(self.markup)

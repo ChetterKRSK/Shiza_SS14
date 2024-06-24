@@ -23,6 +23,12 @@ class MainWindow(QMainWindow):
             lambda: self.connectingWindow.close()
         )
 
+    def openAddMessageWindow(self):
+        pass
+
+    def disconnect(self):
+        pass
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
