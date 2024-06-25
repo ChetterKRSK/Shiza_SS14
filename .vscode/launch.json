@@ -19,6 +19,14 @@
             "program": "client.py",
             "console": "integratedTerminal",
             "consoleName": "Client"
+        },
+        {
+            "name": "ClientProgramm",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "consoleName": "Client Programm"
         }
     ],
     "compounds": [
@@ -27,6 +35,14 @@
             "configurations": [
                 "Server",
                 "Client"
+            ],
+            "stopAll": true
+        },
+        {
+            "name": "Server/ClientProgramm",
+            "configurations": [
+                "Server",
+                "ClientProgramm"
             ],
             "stopAll": true
         }
