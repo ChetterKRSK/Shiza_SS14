@@ -10,9 +10,9 @@ class ClientSocket:
         self.ip = ip
         self.port = port
         self.connected = False
-        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connect(self):
+        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect((self.ip, self.port))
         self.connected = True
 
