@@ -17,8 +17,9 @@ def handle_client(client_socket, client_address):
                 message_dict = json.loads(getting_data)
                 print(message_dict)
                 keyboard.press_and_release(message_dict["key_to_print"])
-                time.sleep(0.5)
+                time.sleep(0.1)
                 keyboard.write(message_dict["message_text"])
+                keyboard.press_and_release("Return")
                 client_socket.sendall(data)
             except (ConnectionResetError, ConnectionAbortedError):
                 break
