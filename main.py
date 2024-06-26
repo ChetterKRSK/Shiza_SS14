@@ -1,4 +1,5 @@
 import sys
+import os
 import client
 import json
 
@@ -160,7 +161,8 @@ if __name__ == "__main__":
     connectionClient = client.ClientSocket()
 
     savedData = {"ip": "", "port": "", "key": "", "messages": []}
-    savedData = load("saved_data.json")
+    if os.path.isfile("saved_data.json"):
+        savedData = load("saved_data.json")
 
     mainWindow = MainWindow()
     connectingDialog = ConnectingDialog(mainWindow)
