@@ -13,14 +13,6 @@
             "consoleName": "Server"
         },
         {
-            "name": "Client",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "client.py",
-            "console": "integratedTerminal",
-            "consoleName": "Client"
-        },
-        {
             "name": "ClientProgramm",
             "type": "debugpy",
             "request": "launch",
@@ -30,14 +22,6 @@
         }
     ],
     "compounds": [
-        {
-            "name": "Server/Client",
-            "configurations": [
-                "Server",
-                "Client"
-            ],
-            "stopAll": true
-        },
         {
             "name": "Server/ClientProgramm",
             "configurations": [
