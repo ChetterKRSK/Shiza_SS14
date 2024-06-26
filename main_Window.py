@@ -33,9 +33,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(1000, 300)
         MainWindow.setMinimumSize(QSize(1000, 300))
         icon = QIcon()
-        icon.addFile(
-            ":/icon/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off
-        )
+        icon.addFile(":/icon/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(
             "QLineEdit {\n"
@@ -129,9 +127,7 @@ class Ui_MainWindow(object):
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(
-            self.pb_ChangeStatus.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy1.setHeightForWidth(self.pb_ChangeStatus.sizePolicy().hasHeightForWidth())
         self.pb_ChangeStatus.setSizePolicy(sizePolicy1)
         self.pb_ChangeStatus.setMinimumSize(QSize(300, 40))
         font2 = QFont()
@@ -212,25 +208,19 @@ class Ui_MainWindow(object):
         self.cb_Messages.setMaxVisibleItems(3)
         self.cb_Messages.setMaxCount(32)
         self.cb_Messages.setInsertPolicy(QComboBox.InsertPolicy.InsertAtBottom)
-        self.cb_Messages.setSizeAdjustPolicy(
-            QComboBox.SizeAdjustPolicy.AdjustToContents
-        )
+        self.cb_Messages.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToContents)
         self.cb_Messages.setMinimumContentsLength(32)
         self.cb_Messages.setFrame(False)
 
         self.hLayout_3.addWidget(self.cb_Messages)
 
-        self.hs_2 = QSpacerItem(
-            25, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
-        )
+        self.hs_2 = QSpacerItem(25, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.hLayout_3.addItem(self.hs_2)
 
         self.kse_Key = QKeySequenceEdit(self.markup)
         self.kse_Key.setObjectName("kse_Key")
-        sizePolicy3 = QSizePolicy(
-            QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum
-        )
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.kse_Key.sizePolicy().hasHeightForWidth())
@@ -246,17 +236,13 @@ class Ui_MainWindow(object):
 
         self.hLayout_3.addWidget(self.kse_Key)
 
-        self.hs_3 = QSpacerItem(
-            25, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
-        )
+        self.hs_3 = QSpacerItem(25, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.hLayout_3.addItem(self.hs_3)
 
         self.pb_SendMessages = QPushButton(self.markup)
         self.pb_SendMessages.setObjectName("pb_SendMessages")
-        sizePolicy1.setHeightForWidth(
-            self.pb_SendMessages.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy1.setHeightForWidth(self.pb_SendMessages.sizePolicy().hasHeightForWidth())
         self.pb_SendMessages.setSizePolicy(sizePolicy1)
         self.pb_SendMessages.setMinimumSize(QSize(100, 40))
         self.pb_SendMessages.setFont(font4)
@@ -274,9 +260,7 @@ class Ui_MainWindow(object):
         self.hLayout_4.setContentsMargins(10, 5, 10, 10)
         self.pb_RemoveMessage = QPushButton(self.markup)
         self.pb_RemoveMessage.setObjectName("pb_RemoveMessage")
-        sizePolicy.setHeightForWidth(
-            self.pb_RemoveMessage.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy.setHeightForWidth(self.pb_RemoveMessage.sizePolicy().hasHeightForWidth())
         self.pb_RemoveMessage.setSizePolicy(sizePolicy)
         self.pb_RemoveMessage.setMinimumSize(QSize(200, 40))
         self.pb_RemoveMessage.setMaximumSize(QSize(250, 16777215))
@@ -295,9 +279,7 @@ class Ui_MainWindow(object):
 
         self.pb_AddMessage = QPushButton(self.markup)
         self.pb_AddMessage.setObjectName("pb_AddMessage")
-        sizePolicy.setHeightForWidth(
-            self.pb_AddMessage.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy.setHeightForWidth(self.pb_AddMessage.sizePolicy().hasHeightForWidth())
         self.pb_AddMessage.setSizePolicy(sizePolicy)
         self.pb_AddMessage.setMinimumSize(QSize(200, 40))
         self.pb_AddMessage.setMaximumSize(QSize(250, 16777215))
@@ -336,15 +318,9 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(
             QCoreApplication.translate("MainWindow", "SpaceStation SHIZA", None)
         )
-        self.le_Status0.setText(
-            QCoreApplication.translate("MainWindow", "STATUS:", None)
-        )
-        self.le_Status1.setText(
-            QCoreApplication.translate("MainWindow", "OFFLINE", None)
-        )
-        self.pb_ChangeStatus.setText(
-            QCoreApplication.translate("MainWindow", "CONNECT", None)
-        )
+        self.le_Status0.setText(QCoreApplication.translate("MainWindow", "STATUS:", None))
+        self.le_Status1.setText(QCoreApplication.translate("MainWindow", "OFFLINE", None))
+        self.pb_ChangeStatus.setText(QCoreApplication.translate("MainWindow", "CONNECT", None))
         self.le_Message.setText("")
         self.le_Message.setPlaceholderText(
             QCoreApplication.translate(
@@ -371,19 +347,11 @@ class Ui_MainWindow(object):
         )
 
         self.kse_Key.setKeySequence("")
-        self.pb_SendMessages.setText(
-            QCoreApplication.translate("MainWindow", "SEND", None)
-        )
+        self.pb_SendMessages.setText(QCoreApplication.translate("MainWindow", "SEND", None))
         # if QT_CONFIG(shortcut)
-        self.pb_SendMessages.setShortcut(
-            QCoreApplication.translate("MainWindow", "Return", None)
-        )
+        self.pb_SendMessages.setShortcut(QCoreApplication.translate("MainWindow", "Return", None))
         # endif // QT_CONFIG(shortcut)
-        self.pb_RemoveMessage.setText(
-            QCoreApplication.translate("MainWindow", "REMOVE", None)
-        )
-        self.pb_AddMessage.setText(
-            QCoreApplication.translate("MainWindow", "ADD", None)
-        )
+        self.pb_RemoveMessage.setText(QCoreApplication.translate("MainWindow", "REMOVE", None))
+        self.pb_AddMessage.setText(QCoreApplication.translate("MainWindow", "ADD", None))
 
     # retranslateUi

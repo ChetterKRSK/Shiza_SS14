@@ -43,9 +43,7 @@ class Ui_Dialog(object):
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.le_NameIPLine.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy.setHeightForWidth(self.le_NameIPLine.sizePolicy().hasHeightForWidth())
         self.le_NameIPLine.setSizePolicy(sizePolicy)
         self.le_NameIPLine.setMinimumSize(QSize(50, 40))
         font = QFont()
@@ -63,9 +61,7 @@ class Ui_Dialog(object):
 
         self.le_IPLine = QLineEdit(Dialog)
         self.le_IPLine.setObjectName("le_IPLine")
-        sizePolicy1 = QSizePolicy(
-            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
-        )
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.le_IPLine.sizePolicy().hasHeightForWidth())
@@ -84,9 +80,7 @@ class Ui_Dialog(object):
         self.hLayout_2.setContentsMargins(10, 5, 10, 5)
         self.le_NamePortLine = QLineEdit(Dialog)
         self.le_NamePortLine.setObjectName("le_NamePortLine")
-        sizePolicy.setHeightForWidth(
-            self.le_NamePortLine.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy.setHeightForWidth(self.le_NamePortLine.sizePolicy().hasHeightForWidth())
         self.le_NamePortLine.setSizePolicy(sizePolicy)
         self.le_NamePortLine.setMinimumSize(QSize(50, 40))
         self.le_NamePortLine.setFont(font)
@@ -126,9 +120,7 @@ class Ui_Dialog(object):
         self.hLayout_3.setContentsMargins(10, 5, 10, 10)
         self.pb_ConnectButton = QPushButton(Dialog)
         self.pb_ConnectButton.setObjectName("pb_ConnectButton")
-        sizePolicy.setHeightForWidth(
-            self.pb_ConnectButton.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy.setHeightForWidth(self.pb_ConnectButton.sizePolicy().hasHeightForWidth())
         self.pb_ConnectButton.setSizePolicy(sizePolicy)
         self.pb_ConnectButton.setMinimumSize(QSize(150, 40))
         self.pb_ConnectButton.setFont(font)
@@ -136,17 +128,13 @@ class Ui_Dialog(object):
 
         self.hLayout_3.addWidget(self.pb_ConnectButton)
 
-        self.hs_1 = QSpacerItem(
-            40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
-        )
+        self.hs_1 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.hLayout_3.addItem(self.hs_1)
 
         self.pb_CancelButton = QPushButton(Dialog)
         self.pb_CancelButton.setObjectName("pb_CancelButton")
-        sizePolicy.setHeightForWidth(
-            self.pb_CancelButton.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy.setHeightForWidth(self.pb_CancelButton.sizePolicy().hasHeightForWidth())
         self.pb_CancelButton.setSizePolicy(sizePolicy)
         self.pb_CancelButton.setMinimumSize(QSize(150, 40))
         self.pb_CancelButton.setFont(font)
@@ -169,14 +157,8 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", "Connect", None))
         self.le_NameIPLine.setText(QCoreApplication.translate("Dialog", "ip:", None))
-        self.le_NamePortLine.setText(
-            QCoreApplication.translate("Dialog", "port:", None)
-        )
-        self.pb_ConnectButton.setText(
-            QCoreApplication.translate("Dialog", "CONNECT", None)
-        )
-        self.pb_CancelButton.setText(
-            QCoreApplication.translate("Dialog", "CANCEL", None)
-        )
+        self.le_NamePortLine.setText(QCoreApplication.translate("Dialog", "port:", None))
+        self.pb_ConnectButton.setText(QCoreApplication.translate("Dialog", "CONNECT", None))
+        self.pb_CancelButton.setText(QCoreApplication.translate("Dialog", "CANCEL", None))
 
     # retranslateUi

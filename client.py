@@ -22,13 +22,9 @@ class ClientSocket:
         if not self.connected:
             # self.connect()
             return
-        message_str = json.dumps(
-            {"message_text": message_text, "key_to_print": key_to_print}
-        )
+        message_str = json.dumps({"message_text": message_text, "key_to_print": key_to_print})
         self.client_socket.send(message_str.encode("utf-8"))
 
     def send_message_in_thread(self, message_text: str, key_to_print: str):
-        thread = threading.Thread(
-            target=self.send_message, args=(message_text, key_to_print)
-        )
+        thread = threading.Thread(target=self.send_message, args=(message_text, key_to_print))
         thread.start()

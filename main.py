@@ -95,9 +95,7 @@ class ConnectingDialog(QDialog):
         self.ui.pb_ConnectButton.clicked.connect(self.connect)
         if "ip" in savedData.keys() and "port" in savedData.keys():
             self.ui.le_IPLine.setText(savedData["ip"])
-            self.ui.le_PortLine.setText(
-                str(savedData["port"]) if savedData["port"] != 0 else ""
-            )
+            self.ui.le_PortLine.setText(str(savedData["port"]) if savedData["port"] != 0 else "")
 
     def connect(self):
         ip = self.ui.le_IPLine.text()
