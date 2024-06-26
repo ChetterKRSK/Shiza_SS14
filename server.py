@@ -4,6 +4,8 @@ import threading
 import time
 import keyboard
 
+import keyboard_blocker
+
 
 def handle_client(client_socket, client_address):
     print(f"Подключение от {client_address}")
@@ -16,10 +18,12 @@ def handle_client(client_socket, client_address):
                 getting_data = data.decode("utf-8")
                 message_dict = json.loads(getting_data)
                 print(message_dict)
+                keyboard_blocker.block()
                 keyboard.press_and_release(message_dict["key_to_print"])
                 time.sleep(0.05)
                 keyboard.write(message_dict["message_text"])
                 keyboard.press_and_release("Return")
+                keyboard_blocker.unblock()
                 client_socket.sendall(data)
             except (ConnectionResetError, ConnectionAbortedError):
                 break
