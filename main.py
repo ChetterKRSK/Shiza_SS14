@@ -4,7 +4,6 @@ import client
 import json
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QDialog
-from PySide6.QtCore import QCoreApplication
 
 from main_Window import Ui_MainWindow as Ui_MainWindow_1
 from connecting_Dialog import Ui_Dialog as UiDialog_1

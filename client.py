@@ -1,8 +1,6 @@
-from ast import arg
 import json
 import socket
 import threading
-import time
 
 
 class ClientSocket:
@@ -34,17 +32,3 @@ class ClientSocket:
             target=self.send_message, args=(message_text, key_to_print)
         )
         thread.start()
-
-
-# Что-то, что замораживает поток, например запуск визуала
-# def freeze():
-#     while True:
-#         print(123)
-#         time.sleep(10)
-
-# Пример запуска
-# client = ClientSocket()
-# client.ip = "localhost"
-# client.port = 12345
-# client.send_message_in_thread("text", "key") Это по нажатию кнопки нужно сделать.
-# freeze()

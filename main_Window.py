@@ -1,53 +1,22 @@
 # -*- coding: utf-8 -*-
 
-################################################################################
-## Form generated from reading UI file 'main_Window.ui'
-##
-## Created by: Qt User Interface Compiler version 6.7.2
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
-
 from PySide6.QtCore import (
     QCoreApplication,
-    QDate,
-    QDateTime,
-    QLocale,
     QMetaObject,
-    QObject,
-    QPoint,
-    QRect,
     QSize,
-    QTime,
-    QUrl,
     Qt,
 )
 from PySide6.QtGui import (
-    QBrush,
-    QColor,
-    QConicalGradient,
     QCursor,
     QFont,
-    QFontDatabase,
-    QGradient,
     QIcon,
-    QImage,
-    QKeySequence,
-    QLinearGradient,
-    QPainter,
-    QPalette,
-    QPixmap,
-    QRadialGradient,
-    QTransform,
 )
 from PySide6.QtWidgets import (
-    QApplication,
     QComboBox,
     QFrame,
     QHBoxLayout,
     QKeySequenceEdit,
     QLineEdit,
-    QMainWindow,
     QPushButton,
     QSizePolicy,
     QSpacerItem,
@@ -64,7 +33,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(1000, 300)
         MainWindow.setMinimumSize(QSize(1000, 300))
         icon = QIcon()
-        icon.addFile(":/icon/icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(
+            ":/icon/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off
+        )
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(
             "QLineEdit {\n"
@@ -77,7 +48,7 @@ class Ui_MainWindow(object):
             "    padding-right: 10%;\n"
             "}"
         )
-        MainWindow.setIconSize(QSize(32, 32))
+        MainWindow.setIconSize(QSize(64, 64))
         MainWindow.setAnimated(True)
         MainWindow.setDocumentMode(False)
         MainWindow.setTabShape(QTabWidget.TabShape.Rounded)
@@ -225,6 +196,8 @@ class Ui_MainWindow(object):
         self.hLayout_3.setObjectName("hLayout_3")
         self.hLayout_3.setContentsMargins(10, 5, 10, 5)
         self.cb_Messages = QComboBox(self.markup)
+        self.cb_Messages.addItem("")
+        self.cb_Messages.addItem("")
         self.cb_Messages.setObjectName("cb_Messages")
         sizePolicy.setHeightForWidth(self.cb_Messages.sizePolicy().hasHeightForWidth())
         self.cb_Messages.setSizePolicy(sizePolicy)
@@ -379,6 +352,22 @@ class Ui_MainWindow(object):
                 "\u041f\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u0435\u043c\u043e\u0435 \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435.",
                 None,
             )
+        )
+        self.cb_Messages.setItemText(
+            0,
+            QCoreApplication.translate(
+                "MainWindow",
+                "/me \u043a\u0430\u0448\u043b\u044f\u043d\u0443\u043b",
+                None,
+            ),
+        )
+        self.cb_Messages.setItemText(
+            1,
+            QCoreApplication.translate(
+                "MainWindow",
+                "/me \u043e\u0442\u0434\u0430\u043b \u0447\u0435\u0441\u0442\u044c",
+                None,
+            ),
         )
 
         self.kse_Key.setKeySequence("")
