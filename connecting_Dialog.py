@@ -59,17 +59,17 @@ class Ui_Dialog(object):
         if not Dialog.objectName():
             Dialog.setObjectName("Dialog")
         Dialog.setWindowModality(Qt.WindowModality.ApplicationModal)
-        Dialog.resize(500, 200)
-        Dialog.setMinimumSize(QSize(500, 200))
+        Dialog.resize(500, 188)
+        Dialog.setMinimumSize(QSize(500, 188))
         Dialog.setMaximumSize(QSize(500, 208))
         self.verticalLayout = QVBoxLayout(Dialog)
         self.verticalLayout.setSpacing(5)
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalLayout.setContentsMargins(0, 5, 0, 5)
-        self.hl_First = QHBoxLayout()
-        self.hl_First.setSpacing(0)
-        self.hl_First.setObjectName("hl_First")
-        self.hl_First.setContentsMargins(10, 10, 10, 10)
+        self.hLayout_1 = QHBoxLayout()
+        self.hLayout_1.setSpacing(0)
+        self.hLayout_1.setObjectName("hLayout_1")
+        self.hLayout_1.setContentsMargins(10, 10, 10, 5)
         self.le_NameIPLine = QLineEdit(Dialog)
         self.le_NameIPLine.setObjectName("le_NameIPLine")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Expanding)
@@ -91,7 +91,7 @@ class Ui_Dialog(object):
         )
         self.le_NameIPLine.setReadOnly(True)
 
-        self.hl_First.addWidget(self.le_NameIPLine)
+        self.hLayout_1.addWidget(self.le_NameIPLine)
 
         self.le_IPLine = QLineEdit(Dialog)
         self.le_IPLine.setObjectName("le_IPLine")
@@ -106,14 +106,14 @@ class Ui_Dialog(object):
         self.le_IPLine.setFont(font)
         self.le_IPLine.setClearButtonEnabled(True)
 
-        self.hl_First.addWidget(self.le_IPLine)
+        self.hLayout_1.addWidget(self.le_IPLine)
 
-        self.verticalLayout.addLayout(self.hl_First)
+        self.verticalLayout.addLayout(self.hLayout_1)
 
-        self.hl_Second = QHBoxLayout()
-        self.hl_Second.setSpacing(0)
-        self.hl_Second.setObjectName("hl_Second")
-        self.hl_Second.setContentsMargins(10, 10, 10, 10)
+        self.hLayout_2 = QHBoxLayout()
+        self.hLayout_2.setSpacing(0)
+        self.hLayout_2.setObjectName("hLayout_2")
+        self.hLayout_2.setContentsMargins(10, 5, 10, 5)
         self.le_NamePortLine = QLineEdit(Dialog)
         self.le_NamePortLine.setObjectName("le_NamePortLine")
         sizePolicy.setHeightForWidth(
@@ -130,7 +130,7 @@ class Ui_Dialog(object):
         )
         self.le_NamePortLine.setReadOnly(True)
 
-        self.hl_Second.addWidget(self.le_NamePortLine)
+        self.hLayout_2.addWidget(self.le_NamePortLine)
 
         self.le_PortLine = QLineEdit(Dialog)
         self.le_PortLine.setObjectName("le_PortLine")
@@ -140,9 +140,9 @@ class Ui_Dialog(object):
         self.le_PortLine.setFont(font)
         self.le_PortLine.setClearButtonEnabled(True)
 
-        self.hl_Second.addWidget(self.le_PortLine)
+        self.hLayout_2.addWidget(self.le_PortLine)
 
-        self.verticalLayout.addLayout(self.hl_Second)
+        self.verticalLayout.addLayout(self.hLayout_2)
 
         self.line = QFrame(Dialog)
         self.line.setObjectName("line")
@@ -152,10 +152,10 @@ class Ui_Dialog(object):
 
         self.verticalLayout.addWidget(self.line)
 
-        self.hl_Third = QHBoxLayout()
-        self.hl_Third.setSpacing(0)
-        self.hl_Third.setObjectName("hl_Third")
-        self.hl_Third.setContentsMargins(10, 10, 10, 10)
+        self.hLayout_3 = QHBoxLayout()
+        self.hLayout_3.setSpacing(0)
+        self.hLayout_3.setObjectName("hLayout_3")
+        self.hLayout_3.setContentsMargins(10, 5, 10, 10)
         self.pb_ConnectButton = QPushButton(Dialog)
         self.pb_ConnectButton.setObjectName("pb_ConnectButton")
         sizePolicy.setHeightForWidth(
@@ -166,13 +166,13 @@ class Ui_Dialog(object):
         self.pb_ConnectButton.setFont(font)
         self.pb_ConnectButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.hl_Third.addWidget(self.pb_ConnectButton)
+        self.hLayout_3.addWidget(self.pb_ConnectButton)
 
         self.hs_1 = QSpacerItem(
             40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
         )
 
-        self.hl_Third.addItem(self.hs_1)
+        self.hLayout_3.addItem(self.hs_1)
 
         self.pb_CancelButton = QPushButton(Dialog)
         self.pb_CancelButton.setObjectName("pb_CancelButton")
@@ -181,12 +181,23 @@ class Ui_Dialog(object):
         )
         self.pb_CancelButton.setSizePolicy(sizePolicy)
         self.pb_CancelButton.setMinimumSize(QSize(150, 40))
+        palette = QPalette()
+        brush = QBrush(QColor(240, 240, 240, 255))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.Button, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.Button, brush)
+        palette.setBrush(QPalette.Disabled, QPalette.Button, brush)
+        self.pb_CancelButton.setPalette(palette)
         self.pb_CancelButton.setFont(font)
         self.pb_CancelButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.hl_Third.addWidget(self.pb_CancelButton)
+        self.hLayout_3.addWidget(self.pb_CancelButton)
 
-        self.verticalLayout.addLayout(self.hl_Third)
+        self.verticalLayout.addLayout(self.hLayout_3)
+
+        QWidget.setTabOrder(self.le_IPLine, self.le_PortLine)
+        QWidget.setTabOrder(self.le_PortLine, self.pb_ConnectButton)
+        QWidget.setTabOrder(self.pb_ConnectButton, self.pb_CancelButton)
 
         self.retranslateUi(Dialog)
 

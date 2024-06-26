@@ -61,7 +61,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(745, 316)
+        MainWindow.resize(1000, 300)
+        MainWindow.setMinimumSize(QSize(1000, 300))
         icon = QIcon()
         icon.addFile(":/icon/icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
@@ -89,7 +90,7 @@ class Ui_MainWindow(object):
         self.hLayout_1 = QHBoxLayout()
         self.hLayout_1.setSpacing(0)
         self.hLayout_1.setObjectName("hLayout_1")
-        self.hLayout_1.setContentsMargins(10, 10, 10, 10)
+        self.hLayout_1.setContentsMargins(10, 10, 10, 5)
         self.le_Status0 = QLineEdit(self.markup)
         self.le_Status0.setObjectName("le_Status0")
         self.le_Status0.setEnabled(True)
@@ -185,7 +186,7 @@ class Ui_MainWindow(object):
         self.hLayout_2 = QHBoxLayout()
         self.hLayout_2.setSpacing(0)
         self.hLayout_2.setObjectName("hLayout_2")
-        self.hLayout_2.setContentsMargins(10, 10, 10, 10)
+        self.hLayout_2.setContentsMargins(10, 5, 10, 5)
         self.le_Message = QLineEdit(self.markup)
         self.le_Message.setObjectName("le_Message")
         sizePolicy2 = QSizePolicy(
@@ -222,13 +223,13 @@ class Ui_MainWindow(object):
         self.hLayout_3 = QHBoxLayout()
         self.hLayout_3.setSpacing(0)
         self.hLayout_3.setObjectName("hLayout_3")
-        self.hLayout_3.setContentsMargins(10, 10, 10, 10)
+        self.hLayout_3.setContentsMargins(10, 5, 10, 5)
         self.cb_Messages = QComboBox(self.markup)
         self.cb_Messages.setObjectName("cb_Messages")
         sizePolicy.setHeightForWidth(self.cb_Messages.sizePolicy().hasHeightForWidth())
         self.cb_Messages.setSizePolicy(sizePolicy)
-        self.cb_Messages.setMinimumSize(QSize(300, 40))
-        self.cb_Messages.setMaximumSize(QSize(300, 16777215))
+        self.cb_Messages.setMinimumSize(QSize(600, 40))
+        self.cb_Messages.setMaximumSize(QSize(600, 16777215))
         font4 = QFont()
         font4.setPointSize(15)
         self.cb_Messages.setFont(font4)
@@ -247,7 +248,7 @@ class Ui_MainWindow(object):
         self.hLayout_3.addWidget(self.cb_Messages)
 
         self.hs_2 = QSpacerItem(
-            25, 0, QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum
+            25, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
         )
 
         self.hLayout_3.addItem(self.hs_2)
@@ -255,7 +256,7 @@ class Ui_MainWindow(object):
         self.kse_Key = QKeySequenceEdit(self.markup)
         self.kse_Key.setObjectName("kse_Key")
         sizePolicy3 = QSizePolicy(
-            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
+            QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum
         )
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
@@ -273,7 +274,7 @@ class Ui_MainWindow(object):
         self.hLayout_3.addWidget(self.kse_Key)
 
         self.hs_3 = QSpacerItem(
-            25, 0, QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum
+            25, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
         )
 
         self.hLayout_3.addItem(self.hs_3)
@@ -287,7 +288,8 @@ class Ui_MainWindow(object):
         self.pb_SendMessages.setMinimumSize(QSize(100, 40))
         self.pb_SendMessages.setFont(font4)
         self.pb_SendMessages.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.pb_SendMessages.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
+        self.pb_SendMessages.setMouseTracking(False)
+        self.pb_SendMessages.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         self.hLayout_3.addWidget(self.pb_SendMessages)
 
@@ -296,20 +298,27 @@ class Ui_MainWindow(object):
         self.hLayout_4 = QHBoxLayout()
         self.hLayout_4.setSpacing(0)
         self.hLayout_4.setObjectName("hLayout_4")
-        self.hLayout_4.setContentsMargins(10, 10, 10, 10)
+        self.hLayout_4.setContentsMargins(10, 5, 10, 10)
         self.pb_RemoveMessage = QPushButton(self.markup)
         self.pb_RemoveMessage.setObjectName("pb_RemoveMessage")
         sizePolicy.setHeightForWidth(
             self.pb_RemoveMessage.sizePolicy().hasHeightForWidth()
         )
         self.pb_RemoveMessage.setSizePolicy(sizePolicy)
-        self.pb_RemoveMessage.setMinimumSize(QSize(150, 40))
+        self.pb_RemoveMessage.setMinimumSize(QSize(200, 40))
+        self.pb_RemoveMessage.setMaximumSize(QSize(250, 16777215))
         self.pb_RemoveMessage.setFont(font4)
         self.pb_RemoveMessage.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.pb_RemoveMessage.setMouseTracking(True)
+        self.pb_RemoveMessage.setMouseTracking(False)
         self.pb_RemoveMessage.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         self.hLayout_4.addWidget(self.pb_RemoveMessage)
+
+        self.horizontalSpacer_2 = QSpacerItem(
+            200, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum
+        )
+
+        self.hLayout_4.addItem(self.horizontalSpacer_2)
 
         self.pb_AddMessage = QPushButton(self.markup)
         self.pb_AddMessage.setObjectName("pb_AddMessage")
@@ -317,15 +326,17 @@ class Ui_MainWindow(object):
             self.pb_AddMessage.sizePolicy().hasHeightForWidth()
         )
         self.pb_AddMessage.setSizePolicy(sizePolicy)
-        self.pb_AddMessage.setMinimumSize(QSize(150, 40))
+        self.pb_AddMessage.setMinimumSize(QSize(200, 40))
+        self.pb_AddMessage.setMaximumSize(QSize(250, 16777215))
         self.pb_AddMessage.setFont(font4)
         self.pb_AddMessage.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.pb_AddMessage.setMouseTracking(False)
         self.pb_AddMessage.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         self.hLayout_4.addWidget(self.pb_AddMessage)
 
         self.horizontalSpacer = QSpacerItem(
-            40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
+            200, 20, QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum
         )
 
         self.hLayout_4.addItem(self.horizontalSpacer)
@@ -333,7 +344,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.hLayout_4)
 
         self.verticalSpacer = QSpacerItem(
-            20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed
+            20, 25, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed
         )
 
         self.verticalLayout.addItem(self.verticalSpacer)
@@ -343,7 +354,6 @@ class Ui_MainWindow(object):
         QWidget.setTabOrder(self.le_Message, self.pb_SendMessages)
 
         self.retranslateUi(MainWindow)
-        self.pb_SendMessages.clicked.connect(self.le_Message.clear)
 
         QMetaObject.connectSlotsByName(MainWindow)
 
@@ -370,6 +380,7 @@ class Ui_MainWindow(object):
                 None,
             )
         )
+
         self.kse_Key.setKeySequence("")
         self.pb_SendMessages.setText(
             QCoreApplication.translate("MainWindow", "SEND", None)

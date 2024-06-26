@@ -22,7 +22,8 @@ class ClientSocket:
 
     def send_message(self, message_text: str, key_to_print: str):
         if not self.connected:
-            self.connect()
+            # self.connect()
+            return
         message_str = json.dumps(
             {"message_text": message_text, "key_to_print": key_to_print}
         )
