@@ -59,12 +59,18 @@ class MainWindow(QMainWindow):
         save("saved_data.json", savedData)
 
     def sendMessage(self) -> None:
+        if not connectionClient.connected:
+            return
         text = self.ui.le_Message.text()
-        self.ui.le_Message.clear()
         key = self.ui.kse_Key.keySequence().toString()
         if text == "" or key == "":
             return
-        connectionClient.send_message_in_thread(message_text=text, key_to_print=key)
+        try:
+            connectionClient.send_message_in_thread(message_text=text, key_to_print=key)
+        except ConnectionResetError:
+            self.changeStatus()
+        else:
+            self.ui.le_Message.clear()
 
     def changeStatus(self) -> None:
         if connectionClient.connected:
