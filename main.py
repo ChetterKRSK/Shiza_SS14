@@ -19,12 +19,12 @@ class TestWindow(QMainWindow):
         self.ui.checkBox.checkStateChanged.connect(self.changeState)
 
     def changeState(self):
-        if self.ui.checkBox.isChecked:
+        if self.ui.checkBox.isChecked():
             # Если клавиатура отнята
-            pass
+            connectionClient.keyboard_fetch_on()
         else:
             # Если клавиатура не отнята
-            pass
+            connectionClient.keyboard_fetch_off()
 
 
 class MainWindow(QMainWindow):
@@ -181,7 +181,7 @@ if __name__ == "__main__":
 
     mainWindow = MainWindow()
     connectingDialog = ConnectingDialog(mainWindow)
-    # mainWindow.show()
+    mainWindow.show()
 
     testWindow = TestWindow()
     testWindow.show()
