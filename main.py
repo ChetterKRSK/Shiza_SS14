@@ -7,6 +7,24 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QDialog
 
 from main_Window import Ui_MainWindow as Ui_MainWindow_1
 from connecting_Dialog import Ui_Dialog as UiDialog_1
+from test_Window import Ui_MainWindow as Ui_TestWindow_1
+
+
+class TestWindow(QMainWindow):
+    def __init__(self):
+        super(TestWindow, self).__init__()
+        self.ui = Ui_TestWindow_1()
+        self.ui.setupUi(self)
+
+        self.ui.checkBox.checkStateChanged.connect(self.changeState)
+
+    def changeState(self):
+        if self.ui.checkBox.isChecked:
+            # Если клавиатура отнята
+            pass
+        else:
+            # Если клавиатура не отнята
+            pass
 
 
 class MainWindow(QMainWindow):
@@ -163,6 +181,9 @@ if __name__ == "__main__":
 
     mainWindow = MainWindow()
     connectingDialog = ConnectingDialog(mainWindow)
-    mainWindow.show()
+    # mainWindow.show()
+
+    testWindow = TestWindow()
+    testWindow.show()
 
     sys.exit(app.exec())
