@@ -5,7 +5,7 @@ import client
 import json
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QDialog
-from PySide6.QtGui import QFont, QFontMetrics
+from PySide6.QtGui import QFontMetrics
 
 from QtDesign.main_Window import Ui_MainWindow as Ui_MainWindow_1
 from QtDesign.connecting_Dialog import Ui_Dialog as Ui_ConnectingDialog
@@ -20,13 +20,16 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         for message in savedData["messages"]:
-            self.ui.cb_Messages.addItem(message)
+            self.ui.cb_Messages.addItem(f"{message[0]} {message[1]}")
         self.ui.kse_Key.setKeySequence(savedData["key"])
 
         self.ui.pb_ChangeStatus.clicked.connect(self.openConnectingDialog)
         self.ui.pb_AddMessage.clicked.connect(self.addMessage)
         self.ui.pb_RemoveMessage.clicked.connect(self.removeMessage)
-        self.ui.cb_Messages.currentIndexChanged.connect(self.pasteMessageFromComboBox)
+        # self.ui.cb_Messages.currentIndexChanged.connect(self.pasteMessageFromComboBox)
+
+        self.ui.cb_Messages.textActivated.connect(self.pasteMessageFromComboBox)
+
         self.ui.pb_SendMessages.clicked.connect(self.sendMessage)
         self.ui.kse_Key.keySequenceChanged.connect(self.changeKey)
         self.ui.le_MessagePrefix.textChanged.connect(self.prefixMessageChangeSize)
@@ -63,22 +66,26 @@ class MainWindow(QMainWindow):
         self.changeStatus()
 
     def addMessage(self) -> None:
+        prefix = self.ui.le_MessagePrefix.text()
         text = self.ui.le_Message.text()
-        if text != "" and text not in savedData["messages"]:
-            savedData["messages"].append(text)
-            self.ui.cb_Messages.addItem(text)
+        if text != "" and [prefix, text] not in savedData["messages"]:
+            savedData["messages"].append([prefix, text])
+            self.ui.cb_Messages.addItem(f"{prefix} {text}")
             save("saved_data.json", savedData)
 
     def removeMessage(self) -> None:
+        prefix = self.ui.le_MessagePrefix.text()
         text = self.ui.le_Message.text()
-        if text in savedData["messages"]:
-            self.ui.cb_Messages.removeItem(savedData["messages"].index(text))
-            savedData["messages"].remove(text)
+        if [prefix, text] in savedData["messages"]:
+            self.ui.cb_Messages.removeItem(savedData["messages"].index([prefix, text]))
+            savedData["messages"].remove([prefix, text])
             save("saved_data.json", savedData)
 
     def pasteMessageFromComboBox(self) -> None:
-        text = savedData["messages"][self.ui.cb_Messages.currentIndex()]
+        prefix = savedData["messages"][self.ui.cb_Messages.currentIndex()][0]
+        text = savedData["messages"][self.ui.cb_Messages.currentIndex()][1]
         self.ui.le_Message.setText(text)
+        self.ui.le_MessagePrefix.setText(prefix)
 
     def changeKey(self) -> None:
         if self.ui.kse_Key.keySequence().toString() == "Return":
@@ -244,6 +251,11 @@ if __name__ == "__main__":
     savedData = {"ip": "", "port": "", "key": "", "messages": []}
     if os.path.isfile("saved_data.json"):
         savedData = load("saved_data.json")
+        for i in range(0, len(savedData["messages"])):
+            if isinstance(savedData["messages"][i], str):
+                savedData["messages"][i] = ["", savedData["messages"][i]]
+    save("saved_data.json", savedData)
+
     settings = {"clearMessage": True, "clearPrefix": True, "language": "ru", "theme": "system"}
     if os.path.isfile("settings.json"):
         settings.update(load("settings.json"))
