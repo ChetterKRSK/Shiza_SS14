@@ -1,12 +1,16 @@
 import sys
 import os
+
 import client
 import json
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QDialog
+from PySide6.QtGui import QFont, QFontMetrics
 
-from main_Window import Ui_MainWindow as Ui_MainWindow_1
-from connecting_Dialog import Ui_Dialog as UiDialog_1
+from QtDesign.main_Window import Ui_MainWindow as Ui_MainWindow_1
+from QtDesign.connecting_Dialog import Ui_Dialog as Ui_ConnectingDialog
+from QtDesign.aboutUs_Dialog import Ui_Dialog as Ui_AboutUsDialog
+from QtDesign.settings_Dialog import Ui_Dialog as Ui_SettingsDialog
 
 
 class MainWindow(QMainWindow):
@@ -19,15 +23,40 @@ class MainWindow(QMainWindow):
             self.ui.cb_Messages.addItem(message)
         self.ui.kse_Key.setKeySequence(savedData["key"])
 
-        self.ui.pb_ChangeStatus.clicked.connect(self.openConnectingWindow)
+        self.ui.pb_ChangeStatus.clicked.connect(self.openConnectingDialog)
         self.ui.pb_AddMessage.clicked.connect(self.addMessage)
         self.ui.pb_RemoveMessage.clicked.connect(self.removeMessage)
         self.ui.cb_Messages.currentIndexChanged.connect(self.pasteMessageFromComboBox)
         self.ui.pb_SendMessages.clicked.connect(self.sendMessage)
         self.ui.kse_Key.keySequenceChanged.connect(self.changeKey)
+        self.ui.le_MessagePrefix.textChanged.connect(self.prefixMessageChangeSize)
+        self.ui.le_MessagePrefix.setToolTip(
+            f"{self.ui.le_MessagePrefix.width()},{self.ui.le_MessagePrefix.height()}"
+        )
 
-    def openConnectingWindow(self) -> None:
+        self.ui.actionSettings.triggered.connect(self.openSettingsDialog)
+        self.ui.actionAbout_as.triggered.connect(self.openAboutUsDialog)
+        self.ui.actionExit.triggered.connect(self.close)
+
+    def prefixMessageChangeSize(self) -> None:
+        if self.ui.le_MessagePrefix.text() != "":
+            fm = QFontMetrics(self.ui.le_MessagePrefix.font())
+            textSize = fm.size(0, self.ui.le_MessagePrefix.text())
+            self.ui.le_MessagePrefix.setFixedSize(
+                textSize.width() + 40, self.ui.le_MessagePrefix.height()
+            )
+        else:
+            size = self.ui.le_MessagePrefix.toolTip().split(",")
+            self.ui.le_MessagePrefix.setFixedSize(int(size[0]), int(size[1]))
+
+    def openConnectingDialog(self) -> None:
         connectingDialog.show()
+
+    def openAboutUsDialog(self) -> None:
+        aboutUsDialog.show()
+
+    def openSettingsDialog(self) -> None:
+        settingsDialog.show()
 
     def disconnect(self) -> None:
         connectionClient.disconnect()
@@ -61,7 +90,7 @@ class MainWindow(QMainWindow):
     def sendMessage(self) -> None:
         if not connectionClient.connected:
             return
-        text = self.ui.le_Message.text()
+        text = f"{self.ui.le_MessagePrefix.text()}{self.ui.le_Message.text()}"
         key = self.ui.kse_Key.keySequence().toString()
         if text == "" or key == "":
             return
@@ -70,25 +99,28 @@ class MainWindow(QMainWindow):
         except ConnectionResetError:
             self.changeStatus()
         else:
-            self.ui.le_Message.clear()
+            if settings["clearMessage"]:
+                self.ui.le_Message.clear()
+            if settings["clearPrefix"]:
+                self.ui.le_MessagePrefix.clear()
 
     def changeStatus(self) -> None:
         if connectionClient.connected:
             self.ui.le_Status1.setText("ONLINE")
             self.ui.pb_ChangeStatus.setText("DISCONNECT")
-            self.ui.pb_ChangeStatus.clicked.disconnect(self.openConnectingWindow)
+            self.ui.pb_ChangeStatus.clicked.disconnect(self.openConnectingDialog)
             self.ui.pb_ChangeStatus.clicked.connect(self.disconnect)
         else:
             self.ui.le_Status1.setText("OFFLINE")
             self.ui.pb_ChangeStatus.setText("CONNECT")
             self.ui.pb_ChangeStatus.clicked.disconnect(self.disconnect)
-            self.ui.pb_ChangeStatus.clicked.connect(self.openConnectingWindow)
+            self.ui.pb_ChangeStatus.clicked.connect(self.openConnectingDialog)
 
 
 class ConnectingDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.ui = UiDialog_1()
+        self.ui = Ui_ConnectingDialog()
         self.ui.setupUi(self)
 
         self.ui.pb_CancelButton.clicked.connect(lambda: self.close())
@@ -143,6 +175,58 @@ class ConnectingDialog(QDialog):
             self.close()
 
 
+class AboutUsDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_AboutUsDialog()
+        self.ui.setupUi(self)
+
+
+class SettingsDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_SettingsDialog()
+        self.ui.setupUi(self)
+
+        self.ui.chB_clearMessage.setChecked(settings["clearMessage"])
+        self.ui.chB_clearPrefix.setChecked(settings["clearPrefix"])
+
+        self.ui.chB_clearMessage.clicked.connect(self.changeSettingClearMessage)
+        self.ui.chB_clearPrefix.clicked.connect(self.changeSettingClearPrefix)
+        self.ui.pb_accept.clicked.connect(self.acceptSettingsChanges)
+        self.ui.pb_ok.clicked.connect(self.close)
+        self.ui.pb_cancel.clicked.connect(self.close)
+
+        self.ui.pb_accept.setEnabled(False)
+
+        global newSettings
+        newSettings = dict()
+
+    def changeSettingClearMessage(self) -> None:
+        newSettings["clearMessage"] = self.ui.chB_clearMessage.isChecked()
+        self.changesCheck()
+
+    def changeSettingClearPrefix(self) -> None:
+        newSettings["clearPrefix"] = self.ui.chB_clearPrefix.isChecked()
+        self.changesCheck()
+
+    def changesCheck(self) -> None:
+        for key in settings.keys():
+            if key not in newSettings.keys():
+                continue
+            if settings[key] != newSettings[key]:
+                self.ui.pb_accept.setEnabled(True)
+                break
+        else:
+            self.ui.pb_accept.setEnabled(False)
+
+    def acceptSettingsChanges(self) -> None:
+        settings.update(newSettings)
+        save("settings.json", settings)
+        newSettings.clear()
+        self.changesCheck()
+
+
 def load(file_name: str) -> dict:
     with open(file_name, "r") as file:
         return json.load(file)
@@ -160,9 +244,14 @@ if __name__ == "__main__":
     savedData = {"ip": "", "port": "", "key": "", "messages": []}
     if os.path.isfile("saved_data.json"):
         savedData = load("saved_data.json")
+    settings = {"clearMessage": True, "clearPrefix": True, "language": "ru", "theme": "system"}
+    if os.path.isfile("settings.json"):
+        settings.update(load("settings.json"))
 
     mainWindow = MainWindow()
     connectingDialog = ConnectingDialog(mainWindow)
+    aboutUsDialog = AboutUsDialog(mainWindow)
+    settingsDialog = SettingsDialog(mainWindow)
     mainWindow.show()
 
     sys.exit(app.exec())
