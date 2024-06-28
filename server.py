@@ -4,6 +4,7 @@ import threading
 import time
 from typing import Dict
 import keyboard
+from socket_client import HeaderSocket
 
 import my_keyboard
 
@@ -18,17 +19,17 @@ class Server:
         try:
             while True:
                 try:
-                    data = client_socket.recv(1024)
+                    data = client_socket.recv()
                     if not data:
                         break
-                    getting_data = data.decode("utf-8")
+                    getting_data = data
                     data_dict = json.loads(getting_data)
                     # print(data_dict)
                     if data_dict["type"] == "message":
                         self.message(data_dict)
                     elif data_dict["type"] == "keyboard_block":
                         self.keyboard_block(data_dict)
-                        client_socket.send("1".encode("utf-8"))
+                        client_socket.send("1")
                     elif data_dict["type"] == "keyboard_fetch":
                         self.keyboard_fetcher(data_dict)
                     # client_socket.sendall(data)
@@ -75,9 +76,8 @@ class Server:
                     keyboard.press(client_key)
 
     def start_echo_server(self, host="", port=12345):
-        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.bind((host, port))
-        server_socket.listen(5)
+        server_socket = HeaderSocket()
+        server_socket.bind_and_listen(host, port)
 
         print(f"Сервер запущен на {host}:{port}. Ожидание подключений...")
 
