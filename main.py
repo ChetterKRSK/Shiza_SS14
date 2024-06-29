@@ -26,14 +26,13 @@ class MainWindow(QMainWindow):
         self.ui.pb_ChangeStatus.clicked.connect(self.openConnectingDialog)
         self.ui.pb_AddMessage.clicked.connect(self.addMessage)
         self.ui.pb_RemoveMessage.clicked.connect(self.removeMessage)
-        # self.ui.cb_Messages.currentIndexChanged.connect(self.pasteMessageFromComboBox)
 
         self.ui.cb_Messages.textActivated.connect(self.pasteMessageFromComboBox)
 
         self.ui.pb_SendMessages.clicked.connect(self.sendMessage)
         self.ui.kse_Key.keySequenceChanged.connect(self.changeKey)
         self.ui.le_MessagePrefix.textChanged.connect(self.prefixMessageChangeSize)
-        self.ui.le_MessagePrefix.setToolTip(
+        self.ui.le_MessagePrefix.setStatusTip(
             f"{self.ui.le_MessagePrefix.width()},{self.ui.le_MessagePrefix.height()}"
         )
 
@@ -49,7 +48,7 @@ class MainWindow(QMainWindow):
                 textSize.width() + 40, self.ui.le_MessagePrefix.height()
             )
         else:
-            size = self.ui.le_MessagePrefix.toolTip().split(",")
+            size = self.ui.le_MessagePrefix.statusTip().split(",")
             self.ui.le_MessagePrefix.setFixedSize(int(size[0]), int(size[1]))
 
     def openConnectingDialog(self) -> None:
@@ -99,6 +98,8 @@ class MainWindow(QMainWindow):
             return
         text = f"{self.ui.le_MessagePrefix.text()}{self.ui.le_Message.text()}"
         key = self.ui.kse_Key.keySequence().toString()
+        if not (len(key) == 1 and (97 < ord(key) < 122 or 65 < ord(key) < 90)):
+            return
         if text == "" or key == "":
             return
         try:
@@ -259,11 +260,13 @@ if __name__ == "__main__":
     settings = {"clearMessage": True, "clearPrefix": True, "language": "ru", "theme": "system"}
     if os.path.isfile("settings.json"):
         settings.update(load("settings.json"))
+    save("settings.json", settings)
 
     mainWindow = MainWindow()
     connectingDialog = ConnectingDialog(mainWindow)
     aboutUsDialog = AboutUsDialog(mainWindow)
     settingsDialog = SettingsDialog(mainWindow)
+
     mainWindow.show()
 
     sys.exit(app.exec())
