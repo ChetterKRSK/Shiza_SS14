@@ -11,6 +11,7 @@ from QtDesign.main_Window import Ui_MainWindow as Ui_MainWindow_1
 from QtDesign.connecting_Dialog import Ui_Dialog as Ui_ConnectingDialog
 from QtDesign.aboutUs_Dialog import Ui_Dialog as Ui_AboutUsDialog
 from QtDesign.settings_Dialog import Ui_Dialog as Ui_SettingsDialog
+from QtDesign.error_Dialog import Ui_Dialog as Ui_ErrorDialog
 
 
 class MainWindow(QMainWindow):
@@ -144,12 +145,18 @@ class ConnectingDialog(QDialog):
         try:
             int(port)
         except ValueError:
-            print("Port error")
+            newPosition = self.mapToGlobal(self.ui.le_PortLine.pos())
+            ErrorDialog(self, (newPosition.x(), newPosition.y()), "Неизвестный формат.")
             return
         else:
             port = int(port)
             if port < 1024 or port > 65535:
-                print("Port error")
+                newPosition = self.mapToGlobal(self.ui.le_PortLine.pos())
+                ErrorDialog(
+                    self,
+                    (newPosition.x(), newPosition.y()),
+                    "Порт не может выходить за диапазон 1024-65535.",
+                )
                 return
 
         ip_list = [i for i in ip.split(".")]
@@ -160,11 +167,21 @@ class ConnectingDialog(QDialog):
                     if i < 0 or i > 255:
                         raise ValueError
             except ValueError:
-                print("Ip error")
+                newPosition = self.mapToGlobal(self.ui.le_IPLine.pos())
+                ErrorDialog(
+                    self,
+                    (newPosition.x(), newPosition.y()),
+                    "Неизвестный формат.",
+                )
                 return
             else:
                 if len(ip_list) != 4:
-                    print("Ip error")
+                    newPosition = self.mapToGlobal(self.ui.le_IPLine.pos())
+                    ErrorDialog(
+                        self,
+                        (newPosition.x(), newPosition.y()),
+                        "Неизвестный формат.",
+                    )
                     return
 
         connectionClient.ip = ip
@@ -172,10 +189,16 @@ class ConnectingDialog(QDialog):
         savedData["ip"] = ip
         savedData["port"] = port
         save("saved_data.json", savedData)
+
         try:
             connectionClient.connect()
         except WindowsError:
-            print("Connect error")
+            newPosition = self.pos()
+            ErrorDialog(
+                self,
+                (newPosition.x(), newPosition.y()),
+                "Ошибка подключения",
+            )
         else:
             with open("saved_data.json", "w") as file:
                 json.dump(savedData, file)
@@ -233,6 +256,22 @@ class SettingsDialog(QDialog):
         save("settings.json", settings)
         newSettings.clear()
         self.changesCheck()
+
+
+class ErrorDialog(QDialog):
+    def __init__(self, parent=None, position: tuple = (0, 0), message: str = "Unknown Error"):
+        super().__init__(parent)
+        self.ui = Ui_ErrorDialog()
+        self.ui.setupUi(self)
+        self.ui.l_errorText.setText(message)
+        geometry = self.geometry()
+        self.setGeometry(
+            position[0],
+            position[1] + int(geometry.height() / 2),
+            geometry.width(),
+            geometry.height(),
+        )
+        self.show()
 
 
 def load(file_name: str) -> dict:

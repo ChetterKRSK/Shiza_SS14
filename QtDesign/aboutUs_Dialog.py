@@ -25,7 +25,7 @@ class Ui_Dialog(object):
         font.setFamilies(["Roboto"])
         Dialog.setFont(font)
         icon = QIcon()
-        icon.addFile(":/icon/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile("./QtDesign/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         Dialog.setWindowIcon(icon)
         self.gridLayout = QGridLayout(Dialog)
         self.gridLayout.setSpacing(0)

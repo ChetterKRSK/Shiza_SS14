@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QSize(1000, 300))
         MainWindow.setWindowTitle("SpaceStation SHIZA")
         icon = QIcon()
-        icon.addFile(":/icon/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile("./QtDesign/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(
             "QLineEdit {\n"
