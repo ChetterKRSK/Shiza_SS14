@@ -3,6 +3,7 @@
 from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
 from PySide6.QtWidgets import (
     QCheckBox,
+    QFrame,
     QHBoxLayout,
     QLabel,
     QSizePolicy,
@@ -22,9 +23,9 @@ class Ui_MainWindow(object):
         self.maket = QWidget(MainWindow)
         self.maket.setObjectName("maket")
         self.verticalLayout = QVBoxLayout(self.maket)
-        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setSpacing(5)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setContentsMargins(5, 5, 5, 5)
         self.l_translationImage = QLabel(self.maket)
         self.l_translationImage.setObjectName("l_translationImage")
         sizePolicy = QSizePolicy(
@@ -37,6 +38,40 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.l_translationImage)
 
+        self.line_2 = QFrame(self.maket)
+        self.line_2.setObjectName("line_2")
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout.addWidget(self.line_2)
+
+        self.hl_2 = QHBoxLayout()
+        self.hl_2.setSpacing(0)
+        self.hl_2.setObjectName("hl_2")
+        self.horizontalSpacer_3 = QSpacerItem(
+            0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
+        )
+
+        self.hl_2.addItem(self.horizontalSpacer_3)
+
+        self.cb_translationEnable = QCheckBox(self.maket)
+        self.cb_translationEnable.setObjectName("cb_translationEnable")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.cb_translationEnable.sizePolicy().hasHeightForWidth())
+        self.cb_translationEnable.setSizePolicy(sizePolicy1)
+
+        self.hl_2.addWidget(self.cb_translationEnable)
+
+        self.horizontalSpacer_4 = QSpacerItem(
+            0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
+        )
+
+        self.hl_2.addItem(self.horizontalSpacer_4)
+
+        self.verticalLayout.addLayout(self.hl_2)
+
         self.hl_1 = QHBoxLayout()
         self.hl_1.setSpacing(0)
         self.hl_1.setObjectName("hl_1")
@@ -48,9 +83,6 @@ class Ui_MainWindow(object):
 
         self.cb_keyboardFetch = QCheckBox(self.maket)
         self.cb_keyboardFetch.setObjectName("cb_keyboardFetch")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Maximum)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.cb_keyboardFetch.sizePolicy().hasHeightForWidth())
         self.cb_keyboardFetch.setSizePolicy(sizePolicy1)
         self.cb_keyboardFetch.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
@@ -76,6 +108,13 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "MainWindow", None))
         self.l_translationImage.setText("")
+        self.cb_translationEnable.setText(
+            QCoreApplication.translate(
+                "MainWindow",
+                "\u0412\u041a\u041b\u042e\u0427\u0418\u0422\u042c \u0422\u0420\u0410\u041d\u0421\u041b\u042f\u0426\u0418\u042e",
+                None,
+            )
+        )
         self.cb_keyboardFetch.setText(
             QCoreApplication.translate(
                 "MainWindow",
