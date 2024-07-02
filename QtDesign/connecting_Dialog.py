@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from PySide6.QtCore import (
-    QCoreApplication,
-    QMetaObject,
-    QSize,
-    Qt,
-)
-from PySide6.QtGui import (
-    QCursor,
-    QFont,
-)
+from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
+from PySide6.QtGui import QCursor, QFont, QIcon
 from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
@@ -27,9 +19,12 @@ class Ui_Dialog(object):
         if not Dialog.objectName():
             Dialog.setObjectName("Dialog")
         Dialog.setWindowModality(Qt.WindowModality.ApplicationModal)
-        Dialog.resize(500, 188)
-        Dialog.setMinimumSize(QSize(500, 188))
-        Dialog.setMaximumSize(QSize(500, 208))
+        Dialog.resize(500, 200)
+        Dialog.setMinimumSize(QSize(500, 200))
+        Dialog.setMaximumSize(QSize(500, 200))
+        icon = QIcon()
+        icon.addFile("./QtDesign/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        Dialog.setWindowIcon(icon)
         self.verticalLayout = QVBoxLayout(Dialog)
         self.verticalLayout.setSpacing(5)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -46,7 +41,9 @@ class Ui_Dialog(object):
         sizePolicy.setHeightForWidth(self.le_NameIPLine.sizePolicy().hasHeightForWidth())
         self.le_NameIPLine.setSizePolicy(sizePolicy)
         self.le_NameIPLine.setMinimumSize(QSize(50, 40))
+        self.le_NameIPLine.setMaximumSize(QSize(16777215, 40))
         font = QFont()
+        font.setFamilies(["Roboto"])
         font.setPointSize(15)
         self.le_NameIPLine.setFont(font)
         self.le_NameIPLine.setFocusPolicy(Qt.FocusPolicy.NoFocus)
@@ -67,6 +64,7 @@ class Ui_Dialog(object):
         sizePolicy1.setHeightForWidth(self.le_IPLine.sizePolicy().hasHeightForWidth())
         self.le_IPLine.setSizePolicy(sizePolicy1)
         self.le_IPLine.setMinimumSize(QSize(400, 40))
+        self.le_IPLine.setMaximumSize(QSize(16777215, 40))
         self.le_IPLine.setFont(font)
         self.le_IPLine.setClearButtonEnabled(True)
 
@@ -83,6 +81,7 @@ class Ui_Dialog(object):
         sizePolicy.setHeightForWidth(self.le_NamePortLine.sizePolicy().hasHeightForWidth())
         self.le_NamePortLine.setSizePolicy(sizePolicy)
         self.le_NamePortLine.setMinimumSize(QSize(50, 40))
+        self.le_NamePortLine.setMaximumSize(QSize(16777215, 40))
         self.le_NamePortLine.setFont(font)
         self.le_NamePortLine.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.le_NamePortLine.setAlignment(
@@ -99,6 +98,7 @@ class Ui_Dialog(object):
         sizePolicy1.setHeightForWidth(self.le_PortLine.sizePolicy().hasHeightForWidth())
         self.le_PortLine.setSizePolicy(sizePolicy1)
         self.le_PortLine.setMinimumSize(QSize(400, 40))
+        self.le_PortLine.setMaximumSize(QSize(16777215, 40))
         self.le_PortLine.setFont(font)
         self.le_PortLine.setClearButtonEnabled(True)
 
@@ -123,6 +123,7 @@ class Ui_Dialog(object):
         sizePolicy.setHeightForWidth(self.pb_ConnectButton.sizePolicy().hasHeightForWidth())
         self.pb_ConnectButton.setSizePolicy(sizePolicy)
         self.pb_ConnectButton.setMinimumSize(QSize(150, 40))
+        self.pb_ConnectButton.setMaximumSize(QSize(16777215, 40))
         self.pb_ConnectButton.setFont(font)
         self.pb_ConnectButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
@@ -137,6 +138,7 @@ class Ui_Dialog(object):
         sizePolicy.setHeightForWidth(self.pb_CancelButton.sizePolicy().hasHeightForWidth())
         self.pb_CancelButton.setSizePolicy(sizePolicy)
         self.pb_CancelButton.setMinimumSize(QSize(150, 40))
+        self.pb_CancelButton.setMaximumSize(QSize(16777215, 40))
         self.pb_CancelButton.setFont(font)
         self.pb_CancelButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 

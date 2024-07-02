@@ -1,5 +1,4 @@
 test.py
 __pycache__
-*.ui
-*.qrc
 saved_data.json
+settings.json
