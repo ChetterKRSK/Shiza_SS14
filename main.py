@@ -21,15 +21,31 @@ class TestWindow(QMainWindow):
         self.ui = Ui_TestWindow_1()
         self.ui.setupUi(self)
 
-        self.ui.checkBox.checkStateChanged.connect(self.changeState)
+        self.ui.cb_keyboardFetch.checkStateChanged.connect(self.changeState)
+        self.ui.cb_translationEnable.checkStateChanged.connect(self.enableBroadcast)
 
     def changeState(self):
-        if self.ui.checkBox.isChecked():
+        if self.ui.cb_keyboardFetch.isChecked():
             # Если клавиатура отнята
             connectionClient.keyboard_fetch_on()
         else:
             # Если клавиатура не отнята
             connectionClient.keyboard_fetch_off()
+
+    def enableBroadcast(self):
+        if self.ui.cb_translationEnable.isChecked():
+            # Сказать серверу, что клиент готов принять изображение
+            ...
+        else:
+            # Сказать серверу, что клиент перестал принимать изображение
+            ...
+
+    def showImage(self): ...
+
+    # Глянь что принимает QImage, там вроде что то массива битов, размера по ширине и высоте и так далее
+
+    # image = QImage()
+    # self.ui.l_translationImage.setPixmap(image)
 
 
 class MainWindow(QMainWindow):
