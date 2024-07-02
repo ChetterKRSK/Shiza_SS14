@@ -23,7 +23,7 @@ class Ui_Dialog(object):
         Dialog.setMinimumSize(QSize(500, 200))
         Dialog.setMaximumSize(QSize(500, 200))
         icon = QIcon()
-        icon.addFile("./QtDesign/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(":/icon/resources/icon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         Dialog.setWindowIcon(icon)
         self.verticalLayout = QVBoxLayout(Dialog)
         self.verticalLayout.setSpacing(5)
