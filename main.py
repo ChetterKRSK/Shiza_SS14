@@ -4,6 +4,7 @@ import client
 import json
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QDialog
+from PySide6.QtGui import QImage
 
 from main_Window import Ui_MainWindow as Ui_MainWindow_1
 from connecting_Dialog import Ui_Dialog as UiDialog_1
@@ -16,15 +17,22 @@ class TestWindow(QMainWindow):
         self.ui = Ui_TestWindow_1()
         self.ui.setupUi(self)
 
-        self.ui.checkBox.checkStateChanged.connect(self.changeState)
+        self.ui.cb_keyboardFetch.checkStateChanged.connect(self.changeState)
 
     def changeState(self):
-        if self.ui.checkBox.isChecked():
+        if self.ui.cb_keyboardFetch.isChecked():
             # Если клавиатура отнята
             connectionClient.keyboard_fetch_on()
         else:
             # Если клавиатура не отнята
             connectionClient.keyboard_fetch_off()
+
+    def showImage(self):
+        # Глянь что принимает QImage, там вроде что то массива битов, размера по ширине и высоте и так далее
+        QImage()
+
+        # image = QImage()
+        # self.ui.l_translationImage.setPixmap(image)
 
 
 class MainWindow(QMainWindow):
